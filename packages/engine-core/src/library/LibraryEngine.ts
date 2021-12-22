@@ -258,7 +258,11 @@ You may have to run ${chalk.greenBright('prisma generate')} for your changes to 
       )
       this.logEmitter.emit('error', this.loggerRustPanic)
     } else {
-      this.logEmitter.emit(event.level, event)
+      this.logEmitter.emit(event.level, {
+        timestamp: new Date(),
+        message: event.message,
+        target: event.module_path,
+      })
     }
   }
 
