@@ -243,7 +243,7 @@ You may have to run ${chalk.greenBright('prisma generate')} for your changes to 
     event.level = event?.level.toLowerCase() ?? 'unknown'
     if (isQueryEvent(event)) {
       this.logEmitter.emit('query', {
-        timestamp: Date.now(),
+        timestamp: new Date(),
         query: event.query,
         params: event.params,
         duration: Number(event.duration_ms),
