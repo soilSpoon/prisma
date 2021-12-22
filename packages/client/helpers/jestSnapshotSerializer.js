@@ -40,6 +40,13 @@ function normalizeBinaryFilePath(str) {
   return str.replace(/query-engine-TEST_PLATFORM\.exe/, 'query-engine-TEST_PLATFORM')
 }
 
+function normalizeLogs(str) {
+  return str.replace(
+    /Started http server on http:\/\/127\.0\.0\.1:\d{1,5}/g,
+    'Started http server on http://127.0.0.1:00000',
+  )
+}
+
 const serializer = {
   test(value) {
     return typeof value === 'string' || value instanceof Error
@@ -47,10 +54,14 @@ const serializer = {
   serialize(value) {
     const message = typeof value === 'string' ? value : value instanceof Error ? value.message : ''
     // TODO: consider introducing a helper function like pipe or compose
-    return normalizeGithubLinks(
-      normalizeToUnixPaths(
-        normalizeBinaryFilePath(
-          normalizeNodeApiLibFilePath(removePlatforms(normalizeTsClientStackTrace(trimErrorPaths(stripAnsi(message))))),
+    return normalizeLogs(
+      normalizeGithubLinks(
+        normalizeToUnixPaths(
+          normalizeBinaryFilePath(
+            normalizeNodeApiLibFilePath(
+              removePlatforms(normalizeTsClientStackTrace(trimErrorPaths(stripAnsi(message)))),
+            ),
+          ),
         ),
       ),
     )
