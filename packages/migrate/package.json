@@ -54,7 +54,7 @@
     "@prisma/debug": "workspace:*",
     "@prisma/get-platform": "3.9.0-7.7a48cf2c1aea8ec23e6dff2500845f31bdf2c468",
     "@sindresorhus/slugify": "1.1.2",
-    "chalk": "4.1.2",
+    "chalk": "5.2.0",
     "execa": "5.1.1",
     "has-yarn": "2.1.0",
     "indent-string": "4.0.0",
